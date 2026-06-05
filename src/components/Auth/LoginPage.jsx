@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+  const [user, setUser] = useState({
+    name: "",
+    phone: 0,
+  });
   // const passwordRef = useRef(null);
-  const nameRef = useRef(null);
-  const phoneRef = useRef(null);
+  // const nameRef = useRef(null);
+  // const phoneRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = {
-      name: nameRef.current.value,
-      phone: parseInt(phoneRef.current.value),
-    };
+    // const user = {
+    //   name: nameRef.current.value,
+    //   phone: parseInt(phoneRef.current.value),
+    // };
     console.log(user);
   };
 
@@ -28,9 +32,11 @@ const LoginPage = () => {
                 type="text"
                 name=""
                 id="name"
-                ref={nameRef}
+                // ref={nameRef}
                 className="form_text_input"
                 placeholder="Enter Name"
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
+                value={user.name}
               />
             </div>
             <div>
@@ -39,9 +45,13 @@ const LoginPage = () => {
                 type="number"
                 name=""
                 id="phone"
-                ref={phoneRef}
+                // ref={phoneRef}
                 className="form_text_input"
                 placeholder="Enter Phone Number"
+                onChange={(e) =>
+                  setUser({ ...user, phone: parseInt(e.target.value) })
+                }
+                value={user.phone}
               />
             </div>
             {/* <div>
