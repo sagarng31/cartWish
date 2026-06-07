@@ -6,6 +6,7 @@ import SingleProduct from "./components/SingleProduct/SingleProduct";
 import CartPage from "./components/Cart/CartPage";
 import MyOrder from "./components/MyOrder/MyOrder";
 import LoginPage from "./components/Auth/LoginPage";
+import SignupPage from "./components/Auth/SignupPage";
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
       {/* <SingleProduct /> */}
       {/* <CartPage /> */}
       {/* <MyOrder /> */}
-      <LoginPage />
+      {/* <LoginPage /> */}
+      <SignupPage />
     </div>
   );
 };

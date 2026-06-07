@@ -1,14 +1,24 @@
 /* eslint-disable no-unused-vars */
 import { useRef, useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import "./LoginPage.css";
 
+const schema = z.object({
+  email: z
+    .string()
+    .email({ message: "Please enter valid email address" })
+    .min(3),
+  password: z.string().min(8),
+});
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: zodResolver(schema) });
   // console.log(formState.errors);
 
   // const [user, setUser] = useState({
@@ -41,6 +51,34 @@ const LoginPage = () => {
           <h2>Login Form</h2>
           <div className="form_inputs">
             <div>
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                name=""
+                id="email"
+                className="form_text_input"
+                placeholder="Enter email"
+                {...register("email")}
+              />
+              {errors.email && (
+                <em className="form_error">{errors.email.message}</em>
+              )}
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name=""
+                id="password"
+                className="form_text_input"
+                placeholder="Enter password"
+                {...register("password")}
+              />
+              {errors.password && (
+                <em className="form_error">{errors.password.message}</em>
+              )}
+            </div>
+            {/* <div>
               <label htmlFor="name">Name</label>
               <input
                 type="text"
@@ -81,7 +119,7 @@ const LoginPage = () => {
               {errors.name?.type === "required" && (
                 <em className="form_error">Please Phone Number</em>
               )}
-            </div>
+            </div> */}
             {/* <div>
               <label htmlFor="password">Password</label>
               <input
