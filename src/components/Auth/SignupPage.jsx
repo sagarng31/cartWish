@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,6 +26,9 @@ const schema = z
   });
 
 const SignupPage = () => {
+  const [profilePic, setProfilePic] = useState(null);
+  console.log(profilePic);
+
   const {
     register,
     handleSubmit,
@@ -44,12 +48,20 @@ const SignupPage = () => {
 
         <div className="image_input_section">
           <div className="image_preview">
-            <img src={user} id="file-ip-1-preview" />
+            <img
+              src={profilePic ? URL.createObjectURL(profilePic) : user}
+              id="file-ip-1-preview"
+            />
           </div>
           <label htmlFor="file-ip-1" className="image_label">
             Upload Image
           </label>
-          <input type="file" id="file-ip-1" className="image_input" />
+          <input
+            type="file"
+            id="file-ip-1"
+            className="image_input"
+            onChange={(e) => setProfilePic(e.target.files[0])}
+          />
         </div>
 
         {/* Form Inputs */}
